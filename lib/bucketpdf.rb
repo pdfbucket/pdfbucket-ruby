@@ -7,7 +7,7 @@ require 'uri'
 
 # Main module
 module Bucketpdf
-  HOST_BUCKET_PDF = 'potion-api-staging.herokuapp.com'
+  DEFAULT_HOST = 'bucketpdf.kommit.co'
   ORIENTATIONS = {
     portrait: 'portrait',
     landscape: 'landscape'
@@ -19,15 +19,17 @@ module Bucketpdf
 
   # Main class
   class Signer
-    attr_reader :api_key, :api_secret
+    attr_reader :api_key, :api_secret, :api_host
 
     def initialize(
       api_key: ENV['BUCKET_PDF_API_KEY'],
-      api_secret: ENV['BUCKET_PDF_API_SECRET'])
+      api_secret: ENV['BUCKET_PDF_API_SECRET'],
+      api_host: ENV['BUCKET_PDF_API_HOST'])
 
       fail 'bucket api_key is required' if api_key.nil? || api_key.strip.empty?
       fail 'bucket api_secret is required' if api_secret.nil? || api_secret.strip.empty?
 
+      @api_host = api_host || DEFAULT_HOST
       @api_key = api_key
       @api_secret = api_secret
     end
@@ -42,7 +44,7 @@ module Bucketpdf
         signed_uri: signed_uri)
 
       URI::HTTPS.build(
-        host: HOST_BUCKET_PDF,
+        host: api_host,
         path: '/api/convert',
         query: query).to_s
     end

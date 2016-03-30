@@ -18,13 +18,13 @@ $ bundle
 
 ## Usage
 
-To sign a URL in your code instantiate a signer object and use its sign method (the new signer will use `BUCKET_PDF_API_KEY` and `BUCKET_PDF_API_SECRET` ENV vars):
+To sign a URL in your code instantiate a signer object and use its sign method. The new signer will use `BUCKET_PDF_API_KEY`, `BUCKET_PDF_API_SECRET`, `BUCKET_PDF_API_HOST` (default is `bucketpdf.kommit.co`) ENV vars:
 
 ```ruby
 signer = Bucketpdf::Signer.new
 
-# You can also explicitly set the api credentials like this
-other_signer = Bucketpdf::Signer.new(api_key: '123', api_secret: '321')
+# You can also set any the api params, overwriting then ENV vars like this
+other_signer = Bucketpdf::Signer.new(api_key: '123', api_secret: '321', api_host: 'potion-api-staging.herokuapp.com')
 
 # And you get the signed_url using the sign method
 signed_url = signer.sign('http://example.com', :landscape, :a4)
