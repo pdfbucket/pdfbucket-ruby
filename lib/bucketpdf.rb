@@ -34,7 +34,7 @@ module Bucketpdf
       @api_secret = api_secret
     end
 
-    def sign(url, orientation, page_size)
+    def generate_url(url, orientation, page_size)
       signed_uri = encrypt(api_secret, url)
 
       query = URI.encode_www_form(
