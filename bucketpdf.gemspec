@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'bucketpdf'
   spec.version       = Bucketpdf::VERSION
   spec.authors       = ['sanrodari']
-  spec.email         = ['sanrodari@gmail.com']
+  spec.email         = ['santiago.rodriguez@kommit.co']
 
   spec.summary       = 'BucketPDF integration'
   spec.description   = 'BucketPDF integration'
