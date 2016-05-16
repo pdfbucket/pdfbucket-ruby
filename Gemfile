@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in bucketpdf.gemspec
+# Specify your gem's dependencies in pdfbucket.gemspec
 gemspec

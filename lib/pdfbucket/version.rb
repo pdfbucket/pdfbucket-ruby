@@ -1,3 +1,3 @@
-module Bucketpdf
+module PDFBucket
   VERSION = "0.1.1"
 end

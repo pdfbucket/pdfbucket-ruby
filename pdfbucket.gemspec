@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bucketpdf/version'
+require 'pdfbucket/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'bucketpdf'
-  spec.version       = Bucketpdf::VERSION
+  spec.name          = 'pdfbucket'
+  spec.version       = PDFBucket::VERSION
   spec.authors       = ['sanrodari']
   spec.email         = ['santiago.rodriguez@kommit.co']
 
-  spec.summary       = 'BucketPDF integration'
-  spec.description   = 'BucketPDF integration'
-  spec.homepage      = 'https://gitlab.kommit.co/bucketpdf/potion'
+  spec.summary       = 'PDFBucket integration'
+  spec.description   = 'PDFBucket integration'
+  spec.homepage      = 'https://github.com/PDFBucket/pdfbucket-ruby'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.

@@ -1,4 +1,4 @@
-require 'bucketpdf/version'
+require 'pdfbucket/version'
 
 require 'openssl'
 require 'digest/sha2'
@@ -6,8 +6,8 @@ require 'base64'
 require 'uri'
 
 # Main module
-module Bucketpdf
-  DEFAULT_HOST = 'bucketpdf.kommit.co'
+module PDFBucket
+  DEFAULT_HOST = 'pdfbucket.kommit.co'
   ORIENTATIONS = {
     portrait: 'portrait',
     landscape: 'landscape'
@@ -22,9 +22,9 @@ module Bucketpdf
     attr_reader :api_key, :api_secret, :api_host
 
     def initialize(
-      api_key: ENV['BUCKET_PDF_API_KEY'],
-      api_secret: ENV['BUCKET_PDF_API_SECRET'],
-      api_host: ENV['BUCKET_PDF_API_HOST'])
+      api_key: ENV['PDF_BUCKET_API_KEY'],
+      api_secret: ENV['PDF_BUCKET_API_SECRET'],
+      api_host: ENV['PDF_BUCKET_API_HOST'])
 
       fail 'bucket api_key is required' if api_key.nil? || api_key.strip.empty?
       fail 'bucket api_secret is required' if api_secret.nil? || api_secret.strip.empty?
