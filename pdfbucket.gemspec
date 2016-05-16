@@ -10,8 +10,9 @@ Gem::Specification.new do |spec|
   spec.email         = ['santiago.rodriguez@kommit.co']
 
   spec.summary       = 'PDFBucket integration'
-  spec.description   = 'PDFBucket integration'
+  spec.description   = 'PDFBucket integration library to use PDFBucket service'
   spec.homepage      = 'https://github.com/PDFBucket/pdfbucket-ruby'
+  spec.license      = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
