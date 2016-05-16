@@ -1,13 +1,13 @@
-# Bucketpdf
+# PDFBucket
 
-This gem allows you to use easily sign URLs to be used with the BucketPDF service.
+This gem allows you to use easily sign URLs to be used with the PDFBucket service.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bucketpdf'
+gem 'pdfbucket'
 ```
 
 And then execute:
@@ -19,13 +19,13 @@ $ bundle
 ## Usage
 
 To sign a URL in your code instantiate a signer object and use its generate_url method.
-The new signer will use `BUCKET_PDF_API_KEY`, `BUCKET_PDF_API_SECRET`, `BUCKET_PDF_API_HOST` (default is `bucketpdf.kommit.co`) ENV vars:
+The new signer will use `PDF_BUCKET_API_KEY`, `PDF_BUCKET_API_SECRET`, `PDF_BUCKET_API_HOST` (default is `pdfbucket.kommit.co`) ENV vars:
 
 ```ruby
-signer = Bucketpdf::Signer.new
+signer = PDFBucket::Signer.new
 
 # You can also set any the api params, overwriting then ENV vars like this
-other_signer = Bucketpdf::Signer.new(api_key: '123', api_secret: '321', api_host: 'potion-api-staging.herokuapp.com')
+other_signer = PDFBucket::Signer.new(api_key: '123', api_secret: '321', api_host: 'potion-api-staging.herokuapp.com')
 
 # And you get the signed_url using the sign method
 signed_url = signer.generate_url('http://example.com', :landscape, :a4)
