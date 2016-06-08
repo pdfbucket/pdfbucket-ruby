@@ -34,12 +34,14 @@ module PDFBucket
       @api_secret = api_secret
     end
 
-    def generate_url(url, orientation, page_size)
+    def generate_url(url, orientation, page_size, margin, zoom)
       signed_uri = encrypt(api_secret, url)
 
       query = URI.encode_www_form(
         orientation: ORIENTATIONS[orientation],
         page_size: PAGE_SIZES[page_size],
+        margin: margin,
+        zoom: zoom,
         api_key: api_key,
         signed_uri: signed_uri)
 

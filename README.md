@@ -28,11 +28,14 @@ signer = PDFBucket::Signer.new
 other_signer = PDFBucket::Signer.new(api_key: '123', api_secret: '321', api_host: 'potion-api-staging.herokuapp.com')
 
 # And you get the signed_url using the sign method
-signed_url = signer.generate_url('http://example.com', :landscape, :a4)
+signed_url = signer.generate_url('http://example.com', :landscape, :a4, '2px', '0.7')
 ```
 
 * Possible values for orientation: :landscape, :portrait
 * Possible values for page size: :letter, :a4
+* Possible values for margin: https://developer.mozilla.org/en-US/docs/Web/CSS/margin#Formal_syntax
+* Possible values for zoom: https://developer.mozilla.org/en-US/docs/Web/CSS/@viewport/zoom#Formal_syntax
+
 
 ## Development
 
