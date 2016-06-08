@@ -7,7 +7,7 @@ require 'uri'
 
 # Main module
 module PDFBucket
-  DEFAULT_HOST = 'pdfbucket.kommit.co'
+  DEFAULT_HOST = 'api.pdfbucket.co'
   ORIENTATIONS = {
     portrait: 'portrait',
     landscape: 'landscape'
