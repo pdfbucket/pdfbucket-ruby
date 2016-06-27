@@ -18,7 +18,7 @@ module PDFBucket
   }
 
   # Main class
-  class Signer
+  class PDFBucket
     attr_reader :api_key, :api_secret, :api_host
 
     def initialize(
@@ -35,7 +35,7 @@ module PDFBucket
     end
 
     def generate_url(url, orientation, page_size, margin, zoom)
-      signed_uri = encrypt(api_secret, url)
+      encrypted_uri = encrypt(api_secret, url)
 
       query = URI.encode_www_form(
         orientation: ORIENTATIONS[orientation],
@@ -43,7 +43,7 @@ module PDFBucket
         margin: margin,
         zoom: zoom,
         api_key: api_key,
-        signed_uri: signed_uri)
+        encrypted_uri: encrypted_uri)
 
       URI::HTTPS.build(
         host: api_host,

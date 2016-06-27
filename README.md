@@ -1,6 +1,6 @@
 # PDFBucket
 
-This gem allows you to use easily sign URLs to be used with the PDFBucket service.
+This gem allows you to integrate easily with the PDFBucket service.
 
 ## Installation
 
@@ -18,17 +18,17 @@ $ bundle
 
 ## Usage
 
-To sign a URL in your code instantiate a signer object and use its generate_url method.
-The new signer will use `PDF_BUCKET_API_KEY`, `PDF_BUCKET_API_SECRET`, `PDF_BUCKET_API_HOST` (default is `pdfbucket.kommit.co`) ENV vars:
+To encrypt a URL in your code instantiate a PDFBucket object and use its generate_url method.
+The new pdf_bucket will use `PDF_BUCKET_API_KEY`, `PDF_BUCKET_API_SECRET`, `PDF_BUCKET_API_HOST` (default is `api.pdfbucket.co`) ENV vars:
 
 ```ruby
-signer = PDFBucket::Signer.new
+pdf_bucket = PDFBucket::PDFBucket.new
 
 # You can also set any the api params, overwriting then ENV vars like this
-other_signer = PDFBucket::Signer.new(api_key: '123', api_secret: '321', api_host: 'potion-api-staging.herokuapp.com')
+other_pdf_bucket = PDFBucket::PDFBucket.new(api_key: '123', api_secret: '321', api_host: 'api.pdfbucket.co')
 
-# And you get the signed_url using the sign method
-signed_url = signer.generate_url('http://example.com', :landscape, :a4, '2px', '0.7')
+# And you get the encrypted_url using the generate_url method
+encrypted_url = pdf_bucket.generate_url('http://example.com', :landscape, :a4, '2px', '0.7')
 ```
 
 * Possible values for orientation: :landscape, :portrait
