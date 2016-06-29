@@ -7,7 +7,7 @@ require 'uri'
 
 # Main module
 module PDFBucket
-  DEFAULT_HOST = 'api.pdfbucket.co'
+  DEFAULT_HOST = 'api.pdfbucket.io'
   ORIENTATIONS = {
     portrait: 'portrait',
     landscape: 'landscape'

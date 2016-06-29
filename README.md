@@ -19,13 +19,13 @@ $ bundle
 ## Usage
 
 To encrypt a URL in your code instantiate a PDFBucket object and use its generate_url method.
-The new pdf_bucket will use `PDF_BUCKET_API_KEY`, `PDF_BUCKET_API_SECRET`, `PDF_BUCKET_API_HOST` (default is `api.pdfbucket.co`) ENV vars:
+The new pdf_bucket will use `PDF_BUCKET_API_KEY`, `PDF_BUCKET_API_SECRET`, `PDF_BUCKET_API_HOST` (default is `api.pdfbucket.io`) ENV vars:
 
 ```ruby
 pdf_bucket = PDFBucket::PDFBucket.new
 
 # You can also set any the api params, overwriting then ENV vars like this
-other_pdf_bucket = PDFBucket::PDFBucket.new(api_key: '123', api_secret: '321', api_host: 'api.pdfbucket.co')
+other_pdf_bucket = PDFBucket::PDFBucket.new(api_key: '123', api_secret: '321', api_host: 'api.example.com')
 
 # And you get the encrypted_url using the generate_url method
 encrypted_url = pdf_bucket.generate_url('http://example.com', :landscape, :a4, '2px', '0.7')
