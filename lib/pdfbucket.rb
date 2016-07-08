@@ -51,7 +51,37 @@ module PDFBucket
         query: query).to_s
     end
 
+    def generate_plain_url(url, orientation, page_size, margin, zoom)
+      signature = sign(api_secret, api_key, url, orientation, page_size, margin, zoom)
+      query = URI.encode_www_form(
+        orientation: ORIENTATIONS[orientation],
+        page_size: PAGE_SIZES[page_size],
+        margin: margin,
+        zoom: zoom,
+        api_key: api_key,
+        uri: url,
+        signature: signature)
+
+      URI::HTTPS.build(
+        host: api_host,
+        path: '/api/convert',
+        query: query).to_s
+    end
+
     private
+
+    def sign(api_secret, api_key, url, orientation, page_size, margin, zoom)
+      params = [
+        api_key,
+        url,
+        ORIENTATIONS[orientation],
+        PAGE_SIZES[page_size],
+        margin,
+        zoom
+      ].join(',')
+
+      Digest::SHA1.hexdigest("#{params}#{api_secret}")
+    end
 
     def encrypt(key, content)
       binary_key = Base64.decode64(key)

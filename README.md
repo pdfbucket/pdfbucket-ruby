@@ -31,6 +31,12 @@ other_pdf_bucket = PDFBucket::PDFBucket.new(api_key: '123', api_secret: '321', a
 encrypted_url = pdf_bucket.generate_url('http://example.com', :landscape, :a4, '2px', '0.7')
 ```
 
+Also you can pass the plain URL to PDFBucket
+
+```ruby
+plain_url = pdf_bucket.generate_plain_url('http://example.com', :landscape, :a4, '2px', '0.7')
+```
+
 * Possible values for orientation: :landscape, :portrait
 * Possible values for page size: :letter, :a4
 * Possible values for margin: https://developer.mozilla.org/en-US/docs/Web/CSS/margin#Formal_syntax
