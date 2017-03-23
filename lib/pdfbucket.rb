@@ -66,7 +66,7 @@ module PDFBucket
     end
 
     def generate_plain_url(url, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in, cache = nil)
-      signature = sign(api_secret, api_key, url, orientation, page_size, margin, zoom)
+      signature = sign(api_secret, api_key, url, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in)
       query = URI.encode_www_form(
         orientation: ORIENTATIONS[orientation],
         page_size: PAGE_SIZES[page_size],
