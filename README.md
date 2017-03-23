@@ -27,20 +27,25 @@ pdf_bucket = PDFBucket::PDFBucket.new
 # You can also set any the api params, overwriting then ENV vars like this
 other_pdf_bucket = PDFBucket::PDFBucket.new(api_key: '123', api_secret: '321', api_host: 'api.example.com')
 
-# And you get the encrypted_url using the generate_url method
-encrypted_url = pdf_bucket.generate_url('http://example.com', :landscape, :a4, '2px', '0.7')
+# And you get the encrypted_url using the generate_url method taking into account the following order:
+
+# (uri, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in, cache)
+encrypted_url = pdf_bucket.generate_url('http://example.com', :landscape, :a4, '2px', '0.7', true, 'header', 'center', '10')
+
+# Also you can pass the plain URL to PDFBucket
+plain_url = pdf_bucket.generate_plain_url('http://example.com', :landscape, :a4, '2px', '0.7', true, 'header', 'center', '10')
 ```
 
-Also you can pass the plain URL to PDFBucket
-
-```ruby
-plain_url = pdf_bucket.generate_plain_url('http://example.com', :landscape, :a4, '2px', '0.7')
-```
-
-* Possible values for orientation: :landscape, :portrait
-* Possible values for page size: :letter, :a4
-* Possible values for margin: https://developer.mozilla.org/en-US/docs/Web/CSS/margin#Formal_syntax
-* Possible values for zoom: https://developer.mozilla.org/en-US/docs/Web/CSS/@viewport/zoom#Formal_syntax
+**Possible values for the different params:**
+* **orientation:** `:landscape` or `:portrait`
+* **page size:** `:letter` or `:a4`
+* **margin:** https://developer.mozilla.org/en-US/docs/Web/CSS/margin#Formal_syntax
+* **zoom:** https://developer.mozilla.org/en-US/docs/Web/CSS/@viewport/zoom#Formal_syntax
+* **pagination:** `true` or `false`
+* **position:** `header` or `footer`
+* **alignment:** `left`, `center` or `right`
+* **expires_in:** integer value in `seconds`
+* **cache:** `0` to disable cache
 
 
 ## Development
