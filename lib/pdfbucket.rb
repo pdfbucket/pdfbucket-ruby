@@ -16,6 +16,15 @@ module PDFBucket
     a4: 'A4',
     letter: 'Letter'
   }
+  POSITIONS = {
+    header: 'header',
+    footer: 'footer'
+  }
+  ALIGNMENTS = {
+    left:   'left',
+    center: 'center',
+    right:  'right'
+  }
 
   # Main class
   class PDFBucket
@@ -34,7 +43,7 @@ module PDFBucket
       @api_secret = api_secret
     end
 
-    def generate_url(url, orientation, page_size, margin, zoom)
+    def generate_url(url, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in, cache = nil)
       encrypted_uri = encrypt(api_secret, url)
 
       query = URI.encode_www_form(
@@ -42,6 +51,11 @@ module PDFBucket
         page_size: PAGE_SIZES[page_size],
         margin: margin,
         zoom: zoom,
+        pagination: pagination.to_s,
+        position: POSITIONS[position],
+        alignment: ALIGNMENTS[alignment],
+        expires_in: expires_in,
+        cache: cache,
         api_key: api_key,
         encrypted_uri: encrypted_uri)
 
@@ -51,13 +65,18 @@ module PDFBucket
         query: query).to_s
     end
 
-    def generate_plain_url(url, orientation, page_size, margin, zoom)
+    def generate_plain_url(url, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in, cache = nil)
       signature = sign(api_secret, api_key, url, orientation, page_size, margin, zoom)
       query = URI.encode_www_form(
         orientation: ORIENTATIONS[orientation],
         page_size: PAGE_SIZES[page_size],
         margin: margin,
         zoom: zoom,
+        pagination: pagination.to_s,
+        position: POSITIONS[position],
+        alignment: ALIGNMENTS[alignment],
+        expires_in: expires_in,
+        cache: cache,
         api_key: api_key,
         uri: url,
         signature: signature)
@@ -69,13 +88,15 @@ module PDFBucket
     end
 
     private
-
-    def sign(api_secret, api_key, url, orientation, page_size, margin, zoom)
+    def sign(api_secret, api_key, url, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in)
       params = [
         api_key,
         url,
         ORIENTATIONS[orientation],
         PAGE_SIZES[page_size],
+        pagination.to_s,
+        POSITIONS[position],
+        ALIGNMENTS[alignment],
         margin,
         zoom
       ].join(',')
