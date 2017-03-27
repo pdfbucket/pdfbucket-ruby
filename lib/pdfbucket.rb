@@ -46,7 +46,7 @@ module PDFBucket
     def generate_url(url, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in, cache = nil)
       encrypted_uri = encrypt(api_secret, url)
 
-      query = URI.encode_www_form(
+      params = {
         orientation: ORIENTATIONS[orientation],
         page_size: PAGE_SIZES[page_size],
         margin: margin,
@@ -55,19 +55,21 @@ module PDFBucket
         position: POSITIONS[position],
         alignment: ALIGNMENTS[alignment],
         expires_in: expires_in,
-        cache: cache,
         api_key: api_key,
-        encrypted_uri: encrypted_uri)
+        encrypted_uri: encrypted_uri
+      }
+      params.merge!(cache: cache) if cache
 
       URI::HTTPS.build(
         host: api_host,
         path: '/api/convert',
-        query: query).to_s
+        query: URI.encode_www_form(params)).to_s
     end
 
     def generate_plain_url(url, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in, cache = nil)
       signature = sign(api_secret, api_key, url, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in)
-      query = URI.encode_www_form(
+
+      params = {
         orientation: ORIENTATIONS[orientation],
         page_size: PAGE_SIZES[page_size],
         margin: margin,
@@ -76,15 +78,16 @@ module PDFBucket
         position: POSITIONS[position],
         alignment: ALIGNMENTS[alignment],
         expires_in: expires_in,
-        cache: cache,
         api_key: api_key,
         uri: url,
-        signature: signature)
+        signature: signature
+      }
+      params.merge!(cache: cache) if cache
 
       URI::HTTPS.build(
         host: api_host,
         path: '/api/convert',
-        query: query).to_s
+        query: URI.encode_www_form(params)).to_s
     end
 
     private
