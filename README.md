@@ -29,11 +29,14 @@ other_pdf_bucket = PDFBucket::PDFBucket.new(api_key: '123', api_secret: '321', a
 
 # And you get the encrypted_url using the generate_url method taking into account the following order:
 
-# (uri, orientation, page_size, margin, zoom, pagination, position, alignment, expires_in, cache)
-encrypted_url = pdf_bucket.generate_url('http://example.com', :landscape, :a4, '2px', '0.7', true, :header, :center, '10')
+# Without pagination: (uri, orientation, page_size, margin, zoom)
+encrypted_url = pdf_bucket.generate_url('http://example.com', :landscape, :a4, '2px', '0.7')
+
+# With pagination: (uri, orientation, page_size, margin, zoom, expires_in, pagination, position, alignment, cache)
+encrypted_url = pdf_bucket.generate_url('http://example.com', :landscape, :a4, '2px', '0.7', 0, true, :header, :center)
 
 # Also you can pass the plain URL to PDFBucket
-plain_url = pdf_bucket.generate_plain_url('http://example.com', :landscape, :a4, '2px', '0.7', true, :header, :center, '10')
+plain_url = pdf_bucket.generate_plain_url('http://example.com', :landscape, :a4, '2px', '0.7', 0, true, :header, :center)
 ```
 
 **Possible values for the different params:**
